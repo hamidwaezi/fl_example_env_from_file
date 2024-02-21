@@ -12,15 +12,21 @@ final class Env {
   final bool isTesting;
 
   const Env()
-      : log = const String.fromEnvironment('log', defaultValue: 'debug'),
-        apiUrl = const String.fromEnvironment('apiUrl', defaultValue: ''),
-        webUrl = const String.fromEnvironment('applicationName'),
-        applicationName = const String.fromEnvironment('bundleIdAndroid'),
-        bundleIdAndroid = const String.fromEnvironment('bundleIdIos'),
-        bundleIdIos = const String.fromEnvironment('webUrl'),
+      : log = const String.fromEnvironment('log',
+            defaultValue: 'Not run by --dart-define-from-file'),
+        apiUrl = const String.fromEnvironment('apiUrl',
+            defaultValue: 'Not run by --dart-define-from-file'),
+        webUrl = const String.fromEnvironment('applicationName',
+            defaultValue: 'Not run by --dart-define-from-file'),
+        applicationName = const String.fromEnvironment('bundleIdAndroid',
+            defaultValue: 'Not run by --dart-define-from-file'),
+        bundleIdAndroid = const String.fromEnvironment('bundleIdIos',
+            defaultValue: 'Not run by --dart-define-from-file'),
+        bundleIdIos = const String.fromEnvironment('webUrl',
+            defaultValue: 'Not run by --dart-define-from-file'),
         isTesting = const bool.fromEnvironment('isTesting', defaultValue: true);
 
-  void printConsole() {
+  String printConsole() {
     if (kDebugMode) {
       print("log: $log");
       print("apiUrl: $apiUrl");
@@ -30,5 +36,15 @@ final class Env {
       print("bundleIdIos: $bundleIdIos");
       print("isTesting: $isTesting");
     }
+
+    return '''
+ log: $log,
+ apiUrl: $apiUrl,
+ webUrl: $webUrl,
+ applicationName: $applicationName,
+ bundleIdAndroid: $bundleIdAndroid,
+ bundleIdIos: $bundleIdIos,
+ isTesting: $isTesting,
+    ''';
   }
 }
