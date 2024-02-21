@@ -17,3 +17,6 @@ if you want to add this configuration in android studio setting, at `Run configu
 #### Vscode
 if you want to add this configuration in VScode setting, at `./.vscode/launch.json` update configurations and add `toolArgs:["--dart-define-from-file",env.json]` to each run profile you like.
 
+## Refrences
+- [gboliknow medium](https://gboliknow.medium.com/efficiently-configuring-your-flutter-app-with-dart-define-from-file-604d9bd49e7b)
+
