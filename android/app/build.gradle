@@ -22,6 +22,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def dartEnvironmentVariables = [
+        envApplicationName: project.hasProperty('applicationName') ? applicationName : 'Sample(Dev)',
+        bundleIdAndroid   : project.hasProperty('bundleIdAndroid') ? bundleIdAndroid : 'com.sample.dev',
+        deepLink          : project.hasProperty('deepLink') ? deepLink : 'sample.come',
+]
+
 android {
     namespace "com.example.fl_example_env_from_file"
     compileSdk flutter.compileSdkVersion
@@ -42,13 +48,18 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.fl_example_env_from_file"
+        ///change bundel id form env
+        applicationId dartEnvironmentVariables.bundleIdAndroid
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    
+        // env items add to string res  , i will use this strings at ./src/main/Androidmanifist.xml
+        resValue "string", "deep_link", dartEnvironmentVariables.deepLink
+        resValue "string", "app_name", dartEnvironmentVariables.envApplicationName
     }
 
     buildTypes {
